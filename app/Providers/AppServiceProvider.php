@@ -22,6 +22,7 @@ class AppServiceProvider extends ServiceProvider {
     public function register() {
         if ($this->app->environment() !== 'production') {
             $this->app->register(\Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);
+			$this->app->register(\Barryvdh\Debugbar\ServiceProvider::class);
             $this->app->register(\Iber\Generator\ModelGeneratorProvider::class);
         } else {
             $this->app->alias('bugsnag.logger', \Illuminate\Contracts\Logging\Log::class);
