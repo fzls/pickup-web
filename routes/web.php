@@ -15,3 +15,7 @@ Route::get('/', function () {
     /*TODO: 喵~*/
     return view('home');
 });
+
+Route::get('/test', function (){
+    return json_encode('meow');
+});

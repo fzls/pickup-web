@@ -90,6 +90,10 @@
 <script src="{{asset('/vendor/js/bootstrap.js')}}"></script>
 <script src="{{asset('/vendor/js/bootstrap-dialog.js')}}"></script>
 <script src="{{asset('/vendor/js/vue.js')}}"></script>
+<script src="{{asset('/vendor/js/axios.js')}}"></script>
+<script>
+    /*TODO: 设置axios处理token相关的逻辑，可以借鉴spa那边写的版本*/
+</script>
 @yield('script')
 </body>
 </html>

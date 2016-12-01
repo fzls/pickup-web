@@ -23,13 +23,21 @@
         new Vue({
             el: '#test',
             data: {
-                message: 'Hello laravel - - - -',
+                message: 'Hello laravel 12312 - - - -',
                 counter: 0
             },
             methods:{
                 inc(){
                     this.counter++;
                 }
+            },
+            mounted(){
+                let vue = this;
+                 axios.get("{{url('test')}}").then(function (response) {
+                    console.log('test'+response.data);
+                    vue.counter = response.data;
+                }).catch(function (error) {
+                 });
             }
         });
     </script>
