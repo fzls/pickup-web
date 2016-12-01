@@ -20,4 +20,5 @@
             console.log('Component ready.')
         }
     }
+
 </script>

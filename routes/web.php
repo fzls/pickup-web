@@ -12,5 +12,6 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    /*TODO: 喵~*/
+    return view('home');
 });
