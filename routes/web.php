@@ -16,12 +16,14 @@ Route::group([/*Oauth 认证流程*/], function () {
     Route::get('/oauth/callback', 'OauthController@callback');
 });
 
-Route::get('/', function () {
-    return view('home');
+Route::group([/*账户相关界面*/], function () {
+    Route::get('/register', 'AccountController@addNecessaryExtraInfo');
 });
 
-Route::get('/register', 'AccountController@addNecessaryExtraInfo');
-
+Route::group([/*首页相关*/], function () {
+    Route::get('/', 'HomeController@homepage');
+    Route::get('/home', 'HomeController@homepage');
+});
 
 
 Route::get('/test', function () {

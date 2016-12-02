@@ -19,6 +19,7 @@
 @endsection
 
 @section('script')
+    {{--TODO: 完成首页相关界面--}}
     <script>
         let app = new Vue({
             el: '#test',
