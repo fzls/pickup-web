@@ -85,15 +85,24 @@
 </div>
 
 <!-- Scripts -->
+{{--3rd party libs--}}
 <script src="{{asset('/vendor/js/jquery-3.1.1.js')}}"></script>
 <script src="{{asset('/vendor/js/tether.js')}}"></script>
 <script src="{{asset('/vendor/js/bootstrap.js')}}"></script>
 <script src="{{asset('/vendor/js/bootstrap-dialog.js')}}"></script>
 <script src="{{asset('/vendor/js/vue.js')}}"></script>
 <script src="{{asset('/vendor/js/axios.js')}}"></script>
-<script>
-    /*TODO: 设置axios处理token相关的逻辑，可以借鉴spa那边写的版本*/
-</script>
+
+{{--utils--}}
+<script src="{{asset('/js/util/dialog.js')}}"></script>
+
+{{--configs--}}
+{{--对配置文件设置版本为当前时间{e.g. 1975-12-25T14:15:16-05:00}，防止被浏览器缓存--}}
+<?php $js_version = Carbon\Carbon::now()->toAtomString(); ?>
+<script src="{{asset('/js/config/api.js')."?version=$js_version"}}"></script>
+<script src="{{asset('/js/config/auth.js')."?version=$js_version"}}"></script>
+<script src="{{asset('/js/config/url.js')."?version=$js_version"}}"></script>
+<script src="{{asset('/js/config/axios.js')."?version=$js_version"}}"></script>
 @yield('script')
 </body>
 </html>

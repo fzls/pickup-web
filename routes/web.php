@@ -11,11 +11,21 @@
 |
 */
 
+Route::group([/*Oauth 认证流程*/], function () {
+    Route::get('/oauth/redirect', 'OauthController@redirect');
+    Route::get('/oauth/callback', 'OauthController@callback');
+});
+
 Route::get('/', function () {
-    /*TODO: 喵~*/
     return view('home');
 });
 
-Route::get('/test', function (){
+Route::get('/register', function () {
+
+});
+
+
+
+Route::get('/test', function () {
     return json_encode('meow');
 });
