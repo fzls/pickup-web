@@ -20,7 +20,7 @@
 
 @section('script')
     <script>
-        new Vue({
+        let app = new Vue({
             el: '#test',
             data: {
                 message: 'Hello laravel 12312 - - - -',

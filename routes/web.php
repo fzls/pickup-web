@@ -20,9 +20,7 @@ Route::get('/', function () {
     return view('home');
 });
 
-Route::get('/register', function () {
-
-});
+Route::get('/register', 'AccountController@addNecessaryExtraInfo');
 
 
 

@@ -103,6 +103,7 @@
 <script src="{{asset('/js/config/auth.js')."?version=$js_version"}}"></script>
 <script src="{{asset('/js/config/url.js')."?version=$js_version"}}"></script>
 <script src="{{asset('/js/config/axios.js')."?version=$js_version"}}"></script>
+
 @yield('script')
 </body>
 </html>
