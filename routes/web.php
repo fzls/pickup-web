@@ -25,6 +25,27 @@ Route::group([/*首页相关*/], function () {
     Route::get('/home', 'HomeController@homepage');
 });
 
+Route::get('/history',function (){
+    return view('history');
+});
+
+Route::get('/ranking',function (){
+    return view('ranking');
+});
+
+Route::get('/me',function (){
+    return redirect('/profile');
+});
+
+Route::get('/profile',function (){
+    return view('account.profile');
+});
+
+Route::get('/change-phone',function (){
+    return view('account.change-phone');
+});
+
+
 
 Route::get('/test', function () {
     return json_encode('meow');

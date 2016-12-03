@@ -22,10 +22,10 @@
             <!-- Left Side Of Navbar -->
             <ul class="nav navbar-nav">
                 &nbsp;
-                <li><a href="#">首页</a></li>
-                <li><a href="#">我的行程</a></li>
-                <li><a href="#">排行榜</a></li>
-                <li><a href="#">个人中心</a></li>
+                <li><a href="{{url('/')}}">首页</a></li>
+                <li><a href="{{url('/history')}}">我的行程</a></li>
+                <li><a href="{{url('/ranking')}}">排行榜</a></li>
+                <li><a href="{{url('/me')}}">个人中心</a></li>
             </ul>
 
             <!-- Right Side Of Navbar -->

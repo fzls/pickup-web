@@ -3,8 +3,8 @@
  */
 const AUTH_BASE_URL = 'http://chenji-meow.cn:9898';
 
-const AUTH_CLIENT_ID     = '4';
-const AUTH_CLIENT_SECRET = 'pHbmanIiDWeg4lldl6eRLXL9mGE5Kr2EtrtvBXc2';
+const AUTH_CLIENT_ID     = '5';
+const AUTH_CLIENT_SECRET = 'JZaXYvlHH0Pv9mxLWLmfszw80pr3R0rtylrery0Y';
 
 
 const AUTH_WEB_SERVER    = 'http://localhost:777';
