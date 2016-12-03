@@ -22,4 +22,5 @@ const AUTH_GRANT_TYPE      = 'authorization_code';
 
 const AUTH_ISSUE_TOKEN_URL = `${AUTH_BASE_URL}/oauth/token`;
 
-const AUTH_TOKEN_LOCAL_STORAGE_KEY ='__oauth_token';
+const AUTH_TOKEN_LOCAL_STORAGE_KEY ='pickup_oauth_token';
+const AUTH_USER_INFO_LOCAL_STORAGE_KEY = 'pickup_user_info';
