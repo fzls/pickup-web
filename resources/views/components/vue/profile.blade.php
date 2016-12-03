@@ -1,23 +1,7 @@
 <script type="text/x-template" id="template-profile">
     <div>
         <div class="row">
-            {{--侧边栏--}}
-            <div class="col-md-3 col-md-offset-1">
-                <div class="list-group">
-                    <a href="#" class="list-group-item text-center active">
-                        <i class="fa fa-github-alt" aria-hidden="true"></i> 信息资料
-                    </a>
-                    <a href="#" class="list-group-item text-center">
-                        <i class="fa fa-credit-card" aria-hidden="true"></i> 个人账户
-                    </a>
-                    <a href="#" class="list-group-item text-center">
-                        <i class="fa fa-motorcycle" aria-hidden="true"></i> 订单管理
-                    </a>
-                    <a href="#" class="list-group-item text-center">
-                        <i class="fa fa-bell" aria-hidden="true"></i> 系统通知
-                    </a>
-                </div>
-            </div>
+            @include('components.blade.user-center.sidebar')
 
             {{--主体内容--}}
             <div class="col-md-7">
@@ -47,7 +31,8 @@
                             <tr>
                                 <td>登陆密码：</td>
                                 <td><i class="fa fa-user-secret"></i></td>
-                                <td><a class="btn btn-info pull-right" href="{{url('/change-password')}}">　修改　</a></td>
+                                {{--TODO: 链接改为认证服务器的修改密码的地址--}}
+                                <td><a class="btn btn-info pull-right" href="#">　修改　</a></td>
                             </tr>
                             <tr>
                                 <td>性别：</td>
@@ -106,6 +91,10 @@
 </script>
 
 <script>
+    window.setTimeout(function () {
+        $("#sidebar-profile").addClass('active');
+    },1000);
+
     Vue.component('pickup-profile', {
         /*TODO:*/
         template: '#template-profile',

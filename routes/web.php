@@ -10,43 +10,25 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+/*Oauth 认证流程*/
+Route::get('/oauth/redirect', function () { return view('oauth.redirect'); });
+Route::get('/oauth/callback', function () { return view('oauth.callback'); });
 
-Route::group([/*Oauth 认证流程*/], function () {
-    Route::get('/oauth/redirect', 'OauthController@redirect');
-    Route::get('/oauth/callback', 'OauthController@callback');
-});
+/*账户相关界面*/
+Route::get('/register', function () { return view('account.register'); });
 
-Route::group([/*账户相关界面*/], function () {
-    Route::get('/register', 'AccountController@addNecessaryExtraInfo');
-});
+/*首页相关*/
+Route::get('/', function () { return redirect('/home'); });
+Route::get('/home', function () { return view('index'); });
 
-Route::group([/*首页相关*/], function () {
-    Route::get('/', 'HomeController@homepage');
-    Route::get('/home', 'HomeController@homepage');
-});
-
-Route::get('/history',function (){
-    return view('history');
-});
-
-Route::get('/ranking',function (){
-    return view('ranking');
-});
-
-Route::get('/me',function (){
-    return redirect('/profile');
-});
-
-Route::get('/profile',function (){
-    return view('account.profile');
-});
-
-Route::get('/change-phone',function (){
-    return view('account.change-phone');
-});
-
-
-
+Route::get('/history', function () { return view('history'); });
+Route::get('/ranking', function () { return view('ranking'); });
+Route::get('/me', function () { return redirect('/profile'); });
+Route::get('/profile', function () { return view('account.profile'); });
+Route::get('/change-phone', function () { return view('account.change-phone'); });
+Route::get('/account', function (){return view('account.account');});
+Route::get('/recharge',function (){return view('account.recharge');});
+/*test*/
 Route::get('/test', function () {
     return json_encode('meow');
 });

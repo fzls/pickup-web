@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-    <pickup-account></pickup-account>
+    <pickup-recharge></pickup-recharge>
 @endsection
 
 @section('script')
-    @include('components.vue.account')
+    @include('components.vue.recharge')
 @endsection
