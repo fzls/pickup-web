@@ -15,7 +15,7 @@
     </li>
 </script>
 <script>
-    Vue.component('user-info', {
+    Vue.component('pickup-user-info', {
         template: '#template-user-info',
         data(){
             return {
@@ -38,7 +38,7 @@
                         let vue = this;
                         axios.get(API_ME).then(function (res) {
                             vue.user = res.data.data;
-                            window.localStorage.setItem(AUTH_USER_INFO_LOCAL_STORAGE_KEY, JSON.stringify(this.user, null, 4));
+                            window.localStorage.setItem(AUTH_USER_INFO_LOCAL_STORAGE_KEY, JSON.stringify(vue.user, null, 4));
                         })
                     }
                 }

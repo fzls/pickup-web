@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <register></register>
+    <pickup-register></pickup-register>
 @endsection
 
 @section('script')

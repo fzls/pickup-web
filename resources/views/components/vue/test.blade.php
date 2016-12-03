@@ -10,7 +10,7 @@
 </script>
 
 <script>
-    Vue.component('test', {
+    Vue.component('pickup-test', {
         template: '#template-test',
         data(){
             return {

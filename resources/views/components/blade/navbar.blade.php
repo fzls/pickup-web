@@ -31,7 +31,7 @@
             <!-- Right Side Of Navbar -->
             <ul class="nav navbar-nav navbar-right" id="user_info">
                 <!-- Authentication Links -->
-                <user-info></user-info>
+                <pickup-user-info></pickup-user-info>
             </ul>
         </div>
     </div>

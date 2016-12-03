@@ -17,7 +17,7 @@
 </script>
 
 <script>
-    Vue.component('register', {
+    Vue.component('pickup-register', {
         template: '#template-register',
         data() {
             return {
