@@ -26,9 +26,14 @@ Route::get('/ranking', function () { return view('ranking'); });
 Route::get('/me', function () { return redirect('/profile'); });
 Route::get('/profile', function () { return view('account.profile'); });
 Route::get('/change-phone', function () { return view('account.change-phone'); });
-Route::get('/account', function (){return view('account.account');});
-Route::get('/recharge',function (){return view('account.recharge');});
-Route::get('/withdraw',function (){return view('account.withdraw');});
+Route::get('/account', function () { return view('account.account'); });
+Route::get('/recharge', function () { return view('account.recharge'); });
+Route::get('/withdraw', function () { return view('account.withdraw'); });
+Route::get('/order', function () { return view('account.order'); });
+/*note: 添加系统消息及乘客和车主的实际业务流程视图*/
+Route::get('/notification', function () { return view('account.notification'); });
+
+
 /*test*/
 Route::get('/test', function () {
     return json_encode('meow');
