@@ -31,7 +31,8 @@ Route::get('/recharge', function () { return view('account.recharge'); });
 Route::get('/withdraw', function () { return view('account.withdraw'); });
 Route::get('/order', function () { return view('account.order'); });
 Route::get('/notification', function () { return view('account.notification'); });
-
+Route::get('/chat', function () { return view('communication.chat'); });
+/*TODO: 完成乘客和车主界面*/
 
 /*test*/
 Route::get('/test', function () {

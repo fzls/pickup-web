@@ -124,11 +124,6 @@
 </script>
 
 <script>
-    /*设定当前侧边栏哪个为active*/
-    window.setTimeout(function () {
-        $("#sidebar-notification").addClass('active');
-    }, 1000);
-
     Vue.component('pickup-notification', {
         /*TODO:*/
         template: '#template-notification',
@@ -136,7 +131,7 @@
             return {}
         },
         mounted(){
-
+            $("#sidebar-notification").addClass('active');
         },
         methods : {}
     })

@@ -112,11 +112,6 @@
 </script>
 
 <script>
-    /*设定当前侧边栏哪个为active*/
-    window.setTimeout(function () {
-        $("#sidebar-order").addClass('active');
-    }, 1000);
-
     Vue.component('pickup-order', {
         /*TODO:*/
         template: '#template-order',
@@ -124,7 +119,7 @@
             return {}
         },
         mounted(){
-
+            $("#sidebar-order").addClass('active');
         },
         methods : {}
     })

@@ -91,10 +91,6 @@
 </script>
 
 <script>
-    window.setTimeout(function () {
-        $("#sidebar-profile").addClass('active');
-    },1000);
-
     Vue.component('pickup-profile', {
         /*TODO:*/
         template: '#template-profile',
@@ -102,7 +98,7 @@
             return {}
         },
         mounted(){
-
+            $("#sidebar-profile").addClass('active');
         },
         methods : {}
     })

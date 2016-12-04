@@ -92,11 +92,6 @@
 </script>
 
 <script>
-    /*设定当前侧边栏哪个为active*/
-    window.setTimeout(function () {
-        $("#sidebar-account").addClass('active');
-    }, 1000);
-
     Vue.component('pickup-account', {
         /*TODO:*/
         template: '#template-account',
@@ -104,7 +99,7 @@
             return {}
         },
         mounted(){
-
+            $("#sidebar-account").addClass('active');
         },
         methods : {}
     })
