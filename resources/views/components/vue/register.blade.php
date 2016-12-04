@@ -1,6 +1,6 @@
 <script type="text/x-template" id="template-register">
     <div class="container text-center">
-        <form>
+        <form class="form-horizontal col-md-offset-2 col-md-8">
             <legend>注册应用信息</legend>
             <div class="form-group">
                 <label for="school_id" class="col-sm-2 control-label">school</label>

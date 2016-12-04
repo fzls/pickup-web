@@ -19,8 +19,8 @@
                     </div>
 
                     <div class="col-md-3">
-                        <button class="btn btn-info btn-block">　　充值　　</button>
-                        <button class="btn btn-info btn-block">　　提现　　</button>
+                        <a class="btn btn-info btn-block" href="{{url('/recharge')}}">　　充值　　</a>
+                        <a class="btn btn-info btn-block" href="{{url('/withdraw')}}">　　提现　　</a>
                     </div>
                 </div>
 

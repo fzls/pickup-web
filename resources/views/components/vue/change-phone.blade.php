@@ -6,8 +6,8 @@
             <div class="col-md-offset-2 col-md-8">
                 <h3>请输入您绑定手机18868111110收到的验证码</h3>
                 <hr>
-                <form>
-                    <div class="form-group row">
+                <form class="form-horizontal">
+                    <div class="form-group">
                         <label for="phone" class="col-md-2 control-label">新绑定手机号</label>
                         <div class="col-md-8">
                             <input type="tel" pattern="/1[34578]\d{9}/" class="form-control" id="phone" placeholder="请输入新的手机号">
@@ -15,7 +15,7 @@
                     </div>
 
 
-                    <div class="form-group row">
+                    <div class="form-group">
                         <label for="verification_code" class="col-md-2 control-label">验证码</label>
                         <div class="col-md-8">
                             <input type="text" class="form-control" id="verification_code" placeholder="请输入验证码">

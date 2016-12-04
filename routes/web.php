@@ -28,6 +28,7 @@ Route::get('/profile', function () { return view('account.profile'); });
 Route::get('/change-phone', function () { return view('account.change-phone'); });
 Route::get('/account', function (){return view('account.account');});
 Route::get('/recharge',function (){return view('account.recharge');});
+Route::get('/withdraw',function (){return view('account.withdraw');});
 /*test*/
 Route::get('/test', function () {
     return json_encode('meow');

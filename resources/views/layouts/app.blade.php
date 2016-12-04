@@ -41,16 +41,28 @@
 <script src="{{asset('/vendor/js/vue.js')}}"></script>
 <script src="{{asset('/vendor/js/axios.js')}}"></script>
 
+
+{{--对一些在开发时经常变化的文件设置版本为当前时间{e.g. 1975-12-25T14:15:16-05:00}，防止被浏览器缓存--}}
+<?php
+function getAssetUrl($path) {
+    $url = asset($path);
+    /*判断是否是本地开发环境，如果是则添加当前时间作为version，使得每次请求的自己写的js/css都是最新的资源文件*/
+    if (app()->environment('local')) {
+        $js_version = Carbon\Carbon::now()->toAtomString();
+        $url .= "?version=$js_version";
+    }
+
+    return $url;
+}
+?>
 {{--utils--}}
-<script src="{{asset('/js/util/dialog.js')}}"></script>
+<script src="{{getAssetUrl('/js/util/dialog.js')}}"></script>
 
 {{--configs--}}
-{{--对配置文件设置版本为当前时间{e.g. 1975-12-25T14:15:16-05:00}，防止被浏览器缓存--}}
-<?php $js_version = Carbon\Carbon::now()->toAtomString(); ?>
-<script src="{{asset('/js/config/api.js')."?version=$js_version"}}"></script>
-<script src="{{asset('/js/config/auth.js')."?version=$js_version"}}"></script>
-<script src="{{asset('/js/config/url.js')."?version=$js_version"}}"></script>
-<script src="{{asset('/js/config/axios.js')."?version=$js_version"}}"></script>
+<script src="{{getAssetUrl('/js/config/api.js')}}"></script>
+<script src="{{getAssetUrl('/js/config/auth.js')}}"></script>
+<script src="{{getAssetUrl('/js/config/url.js')}}"></script>
+<script src="{{getAssetUrl('/js/config/axios.js')}}"></script>
 
 
 {{--添加子页面所需的component--}}
