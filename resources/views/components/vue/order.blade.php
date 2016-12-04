@@ -13,6 +13,19 @@
                     <li class="active"><a href="#order-passenger" data-toggle="tab">乘客</a></li>
                     <li><a href="#order-driver" data-toggle="tab">车主</a></li>
                 </ul>
+
+                <hr>
+
+                <div class="row">
+                    <div class="form-group col-md-3">
+                        <select class="form-control">
+                            <option value="all" selected>所有订单</option>
+                            <option value="paid">已支付</option>
+                            <option value="unpaid">待支付</option>
+                        </select>
+                    </div>
+                </div>
+
                 <!-- TAB CONTENT -->
                 <div class="tab-content">
                     <div class="active tab-pane fade in" id="order-passenger">
@@ -29,15 +42,15 @@
                             <tbody>
                             {{--TODO: 填充实际数据--}}
                             <tr>
-                                <td>2016.11.28  12:24</td>
-                                <td>3.8km    25min</td>
+                                <td>2016.11.28 12:24</td>
+                                <td>3.8km 25min</td>
                                 <td>待支付</td>
                                 <td>已完成</td>
                                 <td><a href="#">前往支付</a></td>
                             </tr>
                             <tr>
-                                <td>2016.11.28  12:24</td>
-                                <td>3.8km    25min</td>
+                                <td>2016.11.28 12:24</td>
+                                <td>3.8km 25min</td>
                                 <td>已支付</td>
                                 <td>已完成</td>
                                 <td><a href="#">详情</a></td>
@@ -67,15 +80,15 @@
                             <tbody>
                             {{--TODO: 填充实际数据--}}
                             <tr>
-                                <td>2016.11.28  12:24</td>
-                                <td>3.8km    25min</td>
+                                <td>2016.11.28 12:24</td>
+                                <td>3.8km 25min</td>
                                 <td>待支付</td>
                                 <td>已完成</td>
                                 <td><a href="#">催单？？？</a></td>
                             </tr>
                             <tr>
-                                <td>2016.11.28  12:24</td>
-                                <td>3.8km    25min</td>
+                                <td>2016.11.28 12:24</td>
+                                <td>3.8km 25min</td>
                                 <td>已支付</td>
                                 <td>已完成</td>
                                 <td><a href="#">详情</a></td>

@@ -3,11 +3,17 @@
  */
 const AUTH_BASE_URL = 'http://chenji-meow.cn:9898';
 
-const AUTH_CLIENT_ID     = '5';
-const AUTH_CLIENT_SECRET = 'JZaXYvlHH0Pv9mxLWLmfszw80pr3R0rtylrery0Y';
+/*localhost:777*/
+// const AUTH_CLIENT_ID     = '5';
+// const AUTH_CLIENT_SECRET = 'JZaXYvlHH0Pv9mxLWLmfszw80pr3R0rtylrery0Y';
+// const AUTH_WEB_SERVER    = 'http://localhost:777';
 
+/*localhost:3000 /browser-sync proxy*/
+const AUTH_CLIENT_ID     = '6';
+const AUTH_CLIENT_SECRET = '7WWHvRbvVtsTzJ98E7TA169RDzDLdQKQMAwMOrsW';
+const AUTH_WEB_SERVER    = 'http://localhost:3000';
 
-const AUTH_WEB_SERVER    = 'http://localhost:777';
+console.log('current web server is '+AUTH_WEB_SERVER);
 
 const AUTH_REDIRECT_PATH = '/oauth/redirect';
 const AUTH_REDIRECT_URI  = `${AUTH_WEB_SERVER}${AUTH_REDIRECT_PATH}`;

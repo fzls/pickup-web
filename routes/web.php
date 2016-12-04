@@ -30,7 +30,6 @@ Route::get('/account', function () { return view('account.account'); });
 Route::get('/recharge', function () { return view('account.recharge'); });
 Route::get('/withdraw', function () { return view('account.withdraw'); });
 Route::get('/order', function () { return view('account.order'); });
-/*note: 添加系统消息及乘客和车主的实际业务流程视图*/
 Route::get('/notification', function () { return view('account.notification'); });
 
 

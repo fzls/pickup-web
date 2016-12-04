@@ -1,13 +1,16 @@
 <script type="text/x-template" id="template-history">
     {{--历史行程内容--}}
     <div>
-        <span style="white-space: pre;"><i class="fa fa-bicycle" aria-hidden="true"></i>&nbsp; <strong>历史行程</strong></span>
+        <h2><i class="fa fa-bicycle" aria-hidden="true"></i>&nbsp; <strong>历史行程</strong></h2>
         <hr>
         <!-- TAB NAVIGATION -->
         <ul class="nav nav-pills nav-justified">
             <li class="active"><a href="#history-passenger" data-toggle="tab">乘客</a></li>
             <li><a href="#history-driver" data-toggle="tab">车主</a></li>
         </ul>
+
+        <hr>
+
         <!-- TAB CONTENT -->
         <div class="tab-content">
             <div class="active tab-pane fade in" id="history-passenger">
