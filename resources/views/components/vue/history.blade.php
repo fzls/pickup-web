@@ -22,13 +22,27 @@
                         <th>目的地</th>
                         <th>路程</th>
                         <th>消费总额</th>
-                        <th>文明程度</th>
-                        <th>准时程度</th>
+                        <th>评分</th>
                         <th>评价详情</th>
-                        <th>送出的礼物</th>
+                        <th>__________收到的礼物__________</th>
                     </tr>
                     </thead>
                     <tbody>
+                    <tr v-for="ph in history_as_passenger">
+                        <td>@{{ ph.created_at }}</td>
+                        <td>@{{ ph.start_name }}</td>
+                        <td>@{{ ph.end_name }}</td>
+                        <td>@{{ ph.distance }}</td>
+                        <td>@{{ compute_total(ph) }}</td>
+                        <td>@{{ passenger_s_rating(dh) }}</td>
+                        <td>@{{ passenger_s_review(dh) }}</td>
+                        <td>
+                            <p v-for="gift in gifts(dh)">
+                                @{{ gift.name }} x @{{ gift.amount }}
+                            </p>
+                        </td>
+                    </tr>
+
                     {{--TODO: 填充实际数据--}}
                     <tr>
                         <td>2016.11.1</td>
@@ -38,30 +52,6 @@
                         <td>test</td>
                         <td>TODO</td>
                         <td>TODO</td>
-                        <td>TODO</td>
-                        <td>TODO</td>
-                    </tr>
-                    <tr>
-                        <td>2016.11.1</td>
-                        <td>test</td>
-                        <td>test</td>
-                        <td>test</td>
-                        <td>test</td>
-                        <td>test</td>
-                        <td>test</td>
-                        <td>test</td>
-                        <td>test</td>
-                    </tr>
-                    <tr>
-                        <td>2016.11.1</td>
-                        <td>test</td>
-                        <td>test</td>
-                        <td>test</td>
-                        <td>test</td>
-                        <td>test</td>
-                        <td>test</td>
-                        <td>test</td>
-                        <td>test</td>
                     </tr>
                     </tbody>
                 </table>
@@ -83,11 +73,9 @@
                         <th>目的地</th>
                         <th>路程</th>
                         <th>收到金额</th>
-                        <th>准时度</th>
-                        <th>服务态度</th>
-                        <th>车技水平</th>
+                        <th>评分</th>
                         <th>评价详情</th>
-                        <th>收到的礼物</th>
+                        <th>__________收到的礼物__________</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -98,47 +86,13 @@
                         <td>@{{ dh.end_name }}</td>
                         <td>@{{ dh.distance }}</td>
                         <td>@{{ compute_total(dh) }}</td>
-                        <td>TODO</td>
-                        <td>TODO</td>
-                        <td>TODO</td>
-                        <td>LATER</td>
-                        <td>LATER</td>
-                    </tr>
-                    <tr>
-                        <td>2016.11.1</td>
-                        <td>test</td>
-                        <td>test</td>
-                        <td>test</td>
-                        <td>test</td>
-                        <td>test</td>
-                        <td>test</td>
-                        <td>test</td>
-                        <td>test</td>
-                        <td>test</td>
-                    </tr>
-                    <tr>
-                        <td>2016.11.1</td>
-                        <td>test</td>
-                        <td>test</td>
-                        <td>test</td>
-                        <td>test</td>
-                        <td>test</td>
-                        <td>test</td>
-                        <td>test</td>
-                        <td>test</td>
-                        <td>test</td>
-                    </tr>
-                    <tr>
-                        <td>2016.11.1</td>
-                        <td>test</td>
-                        <td>test</td>
-                        <td>test</td>
-                        <td>test</td>
-                        <td>test</td>
-                        <td>test</td>
-                        <td>test</td>
-                        <td>test</td>
-                        <td>test</td>
+                        <td>@{{ driver_s_rating(dh) }}</td>
+                        <td>@{{ driver_s_review(dh) }}</td>
+                        <td>
+                            <p v-for="gift in gifts(dh)">
+                                @{{ gift.name }} x @{{ gift.amount }}
+                            </p>
+                        </td>
                     </tr>
                     </tbody>
                 </table>
@@ -200,6 +154,31 @@
             },
             compute_total(history){
                 return parseFloat(history.base_amount) + parseFloat(history.gift_amount) + parseFloat(history.penalty_amount);
+            },
+            driver_s_rating(history){
+                let review = _.find(history.reviews, {reviewee_id: history.driver_id});
+                return review.rating || '';
+            },
+            driver_s_review(history){
+                let review = _.find(history.reviews, {reviewee_id: history.driver_id});
+                return review.comment || '';
+            },
+            passenger_s_rating(history){
+                let review = _.find(history.reviews, {reviewee_id: history.passenger_id});
+                return review.rating || '';
+            },
+            passenger_s_review(history){
+                let review = _.find(history.reviews, {reviewee_id: history.passenger_id});
+                return review.comment || '';
+            },
+            gifts(history){
+                return _.map(history.gift_bundles, function (gift_bundle) {
+                    return {
+                        name  : gift_bundle.gift.name,
+                        pic   : gift_bundle.gift.pic,
+                        amount: gift_bundle.amount
+                    };
+                });
             }
         }
     })

@@ -45,6 +45,7 @@
 <script src="{{asset('/vendor/js/bootstrap-datetimepicker.js')}}"></script>
 <script src="{{asset('/vendor/js/vue.js')}}"></script>
 <script src="{{asset('/vendor/js/axios.js')}}"></script>
+<script src="{{asset('/vendor/js/lodash.min.js')}}"></script>
 
 
 {{--对一些在开发时经常变化的文件设置版本为当前时间{e.g. 1975-12-25T14:15:16-05:00}，防止被浏览器缓存--}}
