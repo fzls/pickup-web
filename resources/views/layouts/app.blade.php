@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="{{asset('/vendor/css/bootstrap.css')}}">
     <link rel="stylesheet" href="{{asset('/vendor/css/bootstrap-theme.css')}}">
     <link rel="stylesheet" href="{{asset('/vendor/css/bootstrap-dialog.css')}}">
+    <link rel="stylesheet" href="{{asset('/vendor/css/bootstrap-datetimepicker.css')}}">
     <link rel="stylesheet" href="{{asset('/vendor/css/titatoggle-dist.css')}}">
     <link rel="stylesheet" href="{{asset('/vendor/css/font-awesome.css')}}">
 
@@ -39,6 +40,9 @@
 <script src="{{asset('/vendor/js/tether.js')}}"></script>
 <script src="{{asset('/vendor/js/bootstrap.js')}}"></script>
 <script src="{{asset('/vendor/js/bootstrap-dialog.js')}}"></script>
+<script src="{{asset('/vendor/js/moment.js')}}"></script>
+<script src="{{asset('/vendor/js/moment-timezone.js')}}"></script>
+<script src="{{asset('/vendor/js/bootstrap-datetimepicker.js')}}"></script>
 <script src="{{asset('/vendor/js/vue.js')}}"></script>
 <script src="{{asset('/vendor/js/axios.js')}}"></script>
 

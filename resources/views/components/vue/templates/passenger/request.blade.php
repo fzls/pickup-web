@@ -43,6 +43,12 @@
             </div>
         </div>
 
+        {{--仅选择预约时显示---上车时间--}}
+        <div class="form-group">
+            <label for="reservation_time">上车时间</label>
+            <input type="text" id="reservation_time" class="form-control">
+        </div>
+
         <button class="btn btn-info btn-block" @click.prevent="submitAndWait">确认叫车</button>
     </form>
 

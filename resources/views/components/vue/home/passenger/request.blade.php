@@ -13,6 +13,9 @@
         },
         mounted(){
             init_map('baidu_map');
+            $('#reservation_time').datetimepicker({
+                defaultDate: moment()
+            });
 //            this.noDriverAvailable();
         },
         methods : {
