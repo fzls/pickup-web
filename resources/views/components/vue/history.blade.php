@@ -34,24 +34,13 @@
                         <td>@{{ ph.end_name }}</td>
                         <td>@{{ ph.distance }}</td>
                         <td>@{{ compute_total(ph) }}</td>
-                        <td>@{{ passenger_s_rating(dh) }}</td>
-                        <td>@{{ passenger_s_review(dh) }}</td>
+                        <td>@{{ passenger_s_rating(ph) }}</td>
+                        <td>@{{ passenger_s_review(ph) }}</td>
                         <td>
-                            <p v-for="gift in gifts(dh)">
+                            <p v-for="gift in gifts(ph)">
                                 @{{ gift.name }} x @{{ gift.amount }}
                             </p>
                         </td>
-                    </tr>
-
-                    {{--TODO: 填充实际数据--}}
-                    <tr>
-                        <td>2016.11.1</td>
-                        <td>test</td>
-                        <td>test</td>
-                        <td>test</td>
-                        <td>test</td>
-                        <td>TODO</td>
-                        <td>TODO</td>
                     </tr>
                     </tbody>
                 </table>
@@ -128,20 +117,20 @@
             /*TODO: here*/
             getHistoryAsPassenger(){
                 let vue = this;
-                axios.get(API_HISTORY).then(function (res) {
+                axios.get(API_HISTORY + '?per_page=5').then(function (res) {
                     vue.history_as_passenger = res.data.data;
                     vue.passenger_pagination = res.data.pagination;
                 });
             },
             getHistoryAsDriver(){
                 let vue = this;
-                axios.get(API_DRIVE_HISTORY).then(function (res) {
+                axios.get(API_DRIVE_HISTORY + '?per_page=5').then(function (res) {
                     vue.history_as_driver = res.data.data;
                     vue.driver_pagination = res.data.pagination;
                 });
             },
             get_prev_page_of_passenger_history(){
-                /*TODO*/
+                /*TODO 添加分页功能*/
             },
             get_next_page_of_passenger_history(){
 
@@ -157,19 +146,19 @@
             },
             driver_s_rating(history){
                 let review = _.find(history.reviews, {reviewee_id: history.driver_id});
-                return review.rating || '';
+                return review ? review.rating : '';
             },
             driver_s_review(history){
                 let review = _.find(history.reviews, {reviewee_id: history.driver_id});
-                return review.comment || '';
+                return review ? review.comment : '';
             },
             passenger_s_rating(history){
                 let review = _.find(history.reviews, {reviewee_id: history.passenger_id});
-                return review.rating || '';
+                return review ? review.rating : '';
             },
             passenger_s_review(history){
                 let review = _.find(history.reviews, {reviewee_id: history.passenger_id});
-                return review.comment || '';
+                return review ? review.comment : '';
             },
             gifts(history){
                 return _.map(history.gift_bundles, function (gift_bundle) {
