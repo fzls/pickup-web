@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="{{asset('/vendor/css/bootstrap.css')}}">
     <link rel="stylesheet" href="{{asset('/vendor/css/bootstrap-theme.css')}}">
     <link rel="stylesheet" href="{{asset('/vendor/css/bootstrap-dialog.css')}}">
+    <link rel="stylesheet" href="{{asset('/vendor/css/titatoggle-dist.css')}}">
     <link rel="stylesheet" href="{{asset('/vendor/css/font-awesome.css')}}">
 
     <!-- Scripts -->

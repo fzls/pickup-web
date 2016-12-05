@@ -1,13 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <pickup-test></pickup-test>
-        </div>
-    </div>
+    <pickup-home></pickup-home>
 @endsection
 
 @section('script')
-    @include('components.vue.test')
+    @include('components.vue.home.home')
 @endsection

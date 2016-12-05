@@ -20,6 +20,9 @@ Route::get('/register', function () { return view('account.register'); });
 /*首页相关*/
 Route::get('/', function () { return redirect('/home'); });
 Route::get('/home', function () { return view('index'); });
+Route::get('/passenger', function () { return view('home.passenger.action'); });
+Route::get('/request-for-car', function () { return view('home.passenger.request'); });
+
 
 Route::get('/history', function () { return view('history'); });
 Route::get('/ranking', function () { return view('ranking'); });
@@ -31,7 +34,9 @@ Route::get('/recharge', function () { return view('account.recharge'); });
 Route::get('/withdraw', function () { return view('account.withdraw'); });
 Route::get('/order', function () { return view('account.order'); });
 Route::get('/notification', function () { return view('account.notification'); });
-Route::get('/chat', function () { return view('communication.chat'); });
+
+/*行程中的界面*/
+Route::get('/history-ing', function () { return view('home.history-ing'); });
 /*TODO: 完成乘客和车主界面*/
 
 /*test*/
