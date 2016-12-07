@@ -8,6 +8,9 @@ const API_ME = '/me';
 const API_HISTORY = '/history';
 const API_DRIVE_HISTORY = '/drive_history';
 
+const API_RANKING_HIGHEST_RATED_DRIVERS = '/rankings/highest_rated_drivers';
+const API_RANKING_MOST_ATTRACTIVE_DRIVERS= '/rankings/most_attractive_drivers';
+const API_RANKING_HIGHEST_RATED_PASSENGERS='/rankings/highest_rated_passengers';
 
 
 function constructPaginationUrl(path, page = 1, per_page = 5){
