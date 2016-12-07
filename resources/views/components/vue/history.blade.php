@@ -24,7 +24,7 @@
                         <th>消费总额</th>
                         <th>评分</th>
                         <th>评价详情</th>
-                        <th>__________收到的礼物__________</th>
+                        <th>__________送出的礼物__________</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -47,8 +47,10 @@
                 <nav>
                     <ul class="pager">
                         <li class="disabled"><a href="#">共@{{ passenger_pagination.total }}条记录</a></li>
-                        <li><a @click.prevent="get_prev_page_of_driver_history" href="#">Previous</a></li>
-                        <li><a @click.prevent="get_next_page_of_driver_history" href="#">Next</a></li>
+                        <li :class="{ disabled : passenger_pagination.current_page === 1}"><a @click.prevent="get_prev_page_of_passenger_history" href="#">Previous</a>
+                        </li>
+                        <li :class="{ disabled : passenger_pagination.current_page === passenger_pagination.last_page}"><a
+                                    @click.prevent="get_next_page_of_passenger_history" href="#">Next</a></li>
                         <li class="disabled"><a href="#">第@{{ passenger_pagination.current_page }}/@{{ passenger_pagination.last_page }}页</a></li>
                     </ul>
                 </nav>
@@ -88,8 +90,10 @@
                 <nav>
                     <ul class="pager">
                         <li class="disabled"><a href="#">共@{{ driver_pagination.total }}条记录</a></li>
-                        <li><a @click.prevent="get_prev_page_of_driver_history" href="#">Previous</a></li>
-                        <li><a @click.prevent="get_next_page_of_driver_history" href="#">Next</a></li>
+                        <li :class="{ disabled : driver_pagination.current_page === 1}"><a @click.prevent="get_prev_page_of_driver_history"
+                                                                                           href="#">Previous</a></li>
+                        <li :class="{ disabled : driver_pagination.current_page === driver_pagination.last_page}"><a
+                                    @click.prevent="get_next_page_of_driver_history" href="#">Next</a></li>
                         <li class="disabled"><a href="#">第@{{ driver_pagination.current_page }}/@{{ driver_pagination.last_page }}页</a></li>
                     </ul>
                 </nav>
@@ -114,52 +118,98 @@
             this.getHistoryAsDriver();
         },
         methods : {
-            /*TODO: here*/
-            getHistoryAsPassenger(){
+            /*获取用户的历史行程（作为乘客）*/
+            getHistoryAsPassenger(page = 1, per_page = 5){
                 let vue = this;
-                axios.get(API_HISTORY + '?per_page=5').then(function (res) {
+                axios.get(constructPaginationUrl(API_HISTORY, page, per_page)).then(function (res) {
                     vue.history_as_passenger = res.data.data;
                     vue.passenger_pagination = res.data.pagination;
                 });
             },
-            getHistoryAsDriver(){
+
+            /*获取用户的历史行程（作为司机）*/
+            getHistoryAsDriver(page = 1, per_page = 5){
                 let vue = this;
-                axios.get(API_DRIVE_HISTORY + '?per_page=5').then(function (res) {
+                axios.get(constructPaginationUrl(API_DRIVE_HISTORY, page, per_page)).then(function (res) {
                     vue.history_as_driver = res.data.data;
                     vue.driver_pagination = res.data.pagination;
                 });
             },
+
+            /*获取历史行程（乘客）的上一页数据*/
             get_prev_page_of_passenger_history(){
-                /*TODO 添加分页功能*/
+                /*如果是第一页，则直接返回*/
+                if (this.passenger_pagination.current_page === 1) {
+                    return
+                }
+
+                /*获取前一页的数据*/
+                this.getHistoryAsPassenger(this.passenger_pagination.current_page - 1);
             },
+
+            /*获取历史行程（乘客）的下一页数据*/
             get_next_page_of_passenger_history(){
+                /*如果是最后一页，则直接返回*/
+                if (this.passenger_pagination.current_page === this.passenger_pagination.last_page) {
+                    return
+                }
 
+                /*获取后一页的数据*/
+                this.getHistoryAsPassenger(this.passenger_pagination.current_page + 1);
             },
+
+            /*获取历史行程（司机）的上一页数据*/
             get_prev_page_of_driver_history(){
+                /*如果是第一页，则直接返回*/
+                if (this.driver_pagination.current_page === 1) {
+                    return
+                }
 
+                /*获取前一页的数据*/
+                this.getHistoryAsDriver(this.driver_pagination.current_page - 1);
             },
+
+            /*获取历史行程（司机）的下一页数据*/
             get_next_page_of_driver_history(){
+                /*如果是最后一页，则直接返回*/
+                if (this.driver_pagination.current_page === this.driver_pagination.last_page) {
+                    return
+                }
 
+                /*获取后一页的数据*/
+                this.getHistoryAsDriver(this.driver_pagination.current_page + 1);
             },
+
+            /*计算该历史行程的总金额（基础金额 + 礼物金额 + 惩罚金（因延迟付款而造成的））*/
             compute_total(history){
                 return parseFloat(history.base_amount) + parseFloat(history.gift_amount) + parseFloat(history.penalty_amount);
             },
+
+            /*司机收到的评分*/
             driver_s_rating(history){
                 let review = _.find(history.reviews, {reviewee_id: history.driver_id});
                 return review ? review.rating : '';
             },
+
+            /*司机收到的评价*/
             driver_s_review(history){
                 let review = _.find(history.reviews, {reviewee_id: history.driver_id});
                 return review ? review.comment : '';
             },
+
+            /*乘客收到的评分*/
             passenger_s_rating(history){
                 let review = _.find(history.reviews, {reviewee_id: history.passenger_id});
                 return review ? review.rating : '';
             },
+
+            /*乘客收到的评价*/
             passenger_s_review(history){
                 let review = _.find(history.reviews, {reviewee_id: history.passenger_id});
                 return review ? review.comment : '';
             },
+
+            /*获取该行程对应的礼物信息*/
             gifts(history){
                 return _.map(history.gift_bundles, function (gift_bundle) {
                     return {

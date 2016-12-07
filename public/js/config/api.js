@@ -7,3 +7,9 @@ const API_USERS = '/users';
 const API_ME = '/me';
 const API_HISTORY = '/history';
 const API_DRIVE_HISTORY = '/drive_history';
+
+
+
+function constructPaginationUrl(path, page = 1, per_page = 5){
+    return `${path}?page=${page}&per_page=${per_page}`;
+}
