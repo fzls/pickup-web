@@ -12,6 +12,10 @@
         mounted(){
 
         },
-        methods : {}
+        methods : {
+            setStatus(is_driver){
+                window.localStorage.setItem(AUTH_USER_STATUS_LOCAL_STORAGE_KEY, JSON.stringify(is_driver));
+            }
+        }
     })
 </script>

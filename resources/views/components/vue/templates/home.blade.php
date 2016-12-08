@@ -8,10 +8,10 @@
 
         <div class="row">
             <div class="col-md-4 col-md-offset-1">
-                <a class="btn btn-block btn-info" href="{{url('/passenger')}}">我是乘客</a>
+                <a class="btn btn-block btn-info" href="{{url('/passenger')}}" @click="setStatus(false)">我是乘客</a>
             </div>
             <div class="col-md-4 col-md-offset-2">
-                <a class="btn btn-block btn-info" href="{{url('/driver')}}">我是车主</a>
+                <a class="btn btn-block btn-info" href="{{url('/driver')}}" @click="setStatus(true)">我是车主</a>
             </div>
         </div>
     </div>
