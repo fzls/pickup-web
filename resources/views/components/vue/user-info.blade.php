@@ -69,7 +69,12 @@
                 /*切换用户身份，并记录*/
                 this.status = !this.status;
                 window.localStorage.setItem(AUTH_USER_STATUS_LOCAL_STORAGE_KEY, JSON.stringify(this.status));
-                /*TODO：跳转到对应身份的起始页面*/
+                if(this.status){
+                    /*如果是司机*/
+                    window.location.href = "{{url('/driver')}}";
+                }else{
+                    window.location.href = "{{url('/passenger')}}";
+                }
             }
         },
     });
