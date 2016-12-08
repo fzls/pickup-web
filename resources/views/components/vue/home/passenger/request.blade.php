@@ -6,7 +6,7 @@
 
 <script>
     Vue.component('pickup-request', {
-        /*TODO:*/
+        /*TODO: 完成叫车一系列的逻辑处理*/
         template: '#template-request',
         data(){
             return {}

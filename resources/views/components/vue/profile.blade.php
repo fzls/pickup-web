@@ -73,7 +73,6 @@
 
 <script>
     Vue.component('pickup-profile', {
-        /*TODO: 添加个人信息*/
         template: '#template-profile',
         data(){
             return {

@@ -7,14 +7,14 @@
                 <div class="form-group">
                     <label for="alipay_account" class="control-label col-md-4">支付宝账号</label>
                     <div class="col-md-8">
-                        <input type="text" class="form-control" id="alipay_account" placeholder="请输入您的支付宝账户">
+                        <input v-model="alipay_account" type="text" class="form-control" id="alipay_account" placeholder="请输入您的支付宝账户">
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="amount" class="control-label col-md-4">提现金额</label>
                     <div class="col-md-8">
-                        <input type="text" class="form-control" id="amount" placeholder="请输入您的提现金额">
+                        <input v-model="amount" type="text" class="form-control" id="amount" placeholder="请输入您的提现金额">
                     </div>
                 </div>
 
@@ -33,7 +33,10 @@
         /*TODO:*/
         template: '#template-withdraw',
         data(){
-            return {}
+            return {
+                alipay_account: '',
+                amount: ''
+            }
         },
         mounted(){
 
@@ -45,6 +48,7 @@
                 /*获取提现信息*/
 
                 /*向服务器发送请求*/
+                /*目前决定采取最直接的方式，也就是手动在服务器端进行转账处理*/
 
                 /*根据结果返回提示*/
                 success_dialog("主人様的提现请求已经在处理队列中了呢，三到五个工作日内将会转账到主人様的支付宝里面哦", "来自小P的友情提示");

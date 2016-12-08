@@ -32,6 +32,7 @@ axios.interceptors.request.use(function (config) {
 axios.interceptors.response.use(function (response) {
     /*如果正常从api服务器返回数据，则根据返回数据中的meta信息决定是否需要做额外处理*/
     if (response.status === 200 && response.request.responseURL.indexOf(API_BASE_URL) !== -1) {
+        // console.log(response);
         // 如果用户未注册本应用，则将让其注册应用(即添加相应信息）
         if (response.data.meta.code === 411) {
             window.location.replace(URL_REGISTER);

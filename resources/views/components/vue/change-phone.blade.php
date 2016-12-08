@@ -10,7 +10,7 @@
                     <div class="form-group">
                         <label for="phone" class="col-md-2 control-label">新绑定手机号</label>
                         <div class="col-md-8">
-                            <input type="tel" pattern="/1[34578]\d{9}/" class="form-control" id="phone" placeholder="请输入新的手机号">
+                            <input v-model="phone" type="tel" pattern="/1[34578]\d{9}/" class="form-control" id="phone" placeholder="请输入新的手机号">
                         </div>
                     </div>
 
@@ -18,7 +18,7 @@
                     <div class="form-group">
                         <label for="verification_code" class="col-md-2 control-label">验证码</label>
                         <div class="col-md-8">
-                            <input type="text" class="form-control" id="verification_code" placeholder="请输入验证码">
+                            <input v-model="code" type="text" class="form-control" id="verification_code" placeholder="请输入验证码">
                         </div>
                         <div class="col-md-2">
                             <button class="btn btn-info" @click="send_code" :disabled="resend_time>0">@{{ resend_time>0?`(${resend_time}s后)`:"" }}重新发送</button>
@@ -28,7 +28,7 @@
                     <hr>
 
                     <div class="text-center form-group">
-                        <button class="btn btn-success">　　　　确认　　　　</button>
+                        <button class="btn btn-success" @click="change_password">　　　　确认　　　　</button>
                     </div>
                 </form>
             </div>
@@ -42,7 +42,9 @@
         template: '#template-change-phone',
         data(){
             return {
-                resend_time: 0
+                resend_time: 0,
+                phone: '',
+                code: '',
             }
         },
         mounted(){
@@ -65,6 +67,16 @@
                     this.resend_time -= 1;
                     window.setTimeout(this.count_down, 1000);
                 }
+            },
+            change_password(){
+                let vue = this;
+                axios.put(API_CHANGE_PHONE,{
+                    phone: this.phone,
+                    code: this.code
+                }).then(function (res) {
+                    /*若出现错误，则在intercepter中或进行处理，此处只需要处理正常修改时的逻辑*/
+                    info_dialog('手机号已经成功修改了呢');
+                });
             }
         }
     })

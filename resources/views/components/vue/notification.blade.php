@@ -26,92 +26,19 @@
                 <div class="container-fluid">
                     {{--第一行开始--}}
                     <div class="row">
-                        <div class="col-md-4">
-                            <div class="panel panel-default">
+                        <div v-for="(notification, index) in notifications" class="col-md-4">
+                            <div :class="getTheme(index)">
                                 <div class="panel-heading">
-                                    <h3 class="panel-title">账户信息</h3>
+                                    <h3 class="panel-title">系统通知</h3>
                                 </div>
                                 <div class="panel-body">
-                                    您的提现申请已经受理成功，资金已到账，请查收
+                                    @{{ notification.content }}
                                 </div>
                                 <div class="panel-footer">
-                                    2016.11.28 12:23
+                                    @{{ notification.created_at }}
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <div class="panel panel-success">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title">账户信息</h3>
-                                </div>
-                                <div class="panel-body">
-                                    您的提现申请已经受理成功，资金已到账，请查收
-                                </div>
-                                <div class="panel-footer">
-                                    2016.11.28 12:23
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="panel panel-warning">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title">账户信息</h3>
-                                </div>
-                                <div class="panel-body">
-                                    您的提现申请已经受理成功，资金已到账，请查收
-                                </div>
-                                <div class="panel-footer">
-                                    2016.11.28 12:23
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    {{--第一行结束--}}
-
-
-                    {{--第二行开始--}}
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="panel panel-info">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title">账户信息</h3>
-                                </div>
-                                <div class="panel-body">
-                                    您的提现申请已经受理成功，资金已到账，请查收
-                                </div>
-                                <div class="panel-footer">
-                                    2016.11.28 12:23
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="panel panel-danger">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title">账户信息</h3>
-                                </div>
-                                <div class="panel-body">
-                                    您的提现申请已经受理成功，资金已到账，请查收
-                                </div>
-                                <div class="panel-footer">
-                                    2016.11.28 12:23
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="panel panel-primary">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title">账户信息</h3>
-                                </div>
-                                <div class="panel-body">
-                                    您的提现申请已经受理成功，资金已到账，请查收
-                                </div>
-                                <div class="panel-footer">
-                                    2016.11.28 12:23
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    {{--第二行结束--}}
                 </div>
                 {{--消息便利贴-结束--}}
 
@@ -128,11 +55,33 @@
         /*TODO:*/
         template: '#template-notification',
         data(){
-            return {}
+            return {
+                notifications: [],
+                themes       : [
+                    'panel-default',
+                    'panel-success',
+                    'panel-warning',
+                    'panel-info',
+                    'panel-danger',
+                    'panel-primary',
+                ]
+            }
         },
         mounted(){
             $("#sidebar-notification").addClass('active');
+            this.getNotifications();
         },
-        methods : {}
+        methods : {
+            getNotifications(page = 1, per_page = 6){
+                let vue = this;
+                axios.get(constructPaginationUrl(API_NOTIFICATIONS, page, per_page)).then(function (res) {
+                    vue.notifications = res.data.data;
+                })
+            },
+
+            getTheme(index){
+                return "panel " + this.themes[index % this.themes.length]
+            }
+        }
     })
 </script>

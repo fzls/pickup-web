@@ -14,6 +14,13 @@ const API_RANKING_HIGHEST_RATED_PASSENGERS='/rankings/highest_rated_passengers';
 
 const API_FREQUENT_USED_LOCATIONS = '/frequent_used_locations';
 
+const API_CHANGE_PHONE = '/phone';
+
+const API_ORDER_PAYMENTS = '/orders/payments';
+const API_ORDER_REVENUES = '/orders/revenues';
+
+const API_NOTIFICATIONS = '/notifications';
+
 function constructPaginationUrl(path, page = 1, per_page = 5){
     return `${path}?page=${page}&per_page=${per_page}`;
 }

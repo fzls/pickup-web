@@ -15,7 +15,7 @@
                     </div>
 
                     <div class="col-md-6">
-                        <span style="font-size: 5em;">666.66</span>
+                        <span style="font-size: 5em;">@{{ user.money }}</span>
                     </div>
 
                     <div class="col-md-3">
@@ -24,52 +24,52 @@
                     </div>
                 </div>
 
-                <hr>
+                {{--<hr>--}}
 
-                {{--常用地址信息--}}
-                <div class="row">
-                    <div class="col-md-3">
-                        <h3>我的礼物</h3>
-                    </div>
+                {{--我的礼物信息  /礼物仅在付款时购买，不可预先购买--}}
+                {{--<div class="row">--}}
+                    {{--<div class="col-md-3">--}}
+                        {{--<h3>我的礼物</h3>--}}
+                    {{--</div>--}}
 
-                    <div class="col-md-8">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="thumbnail">
-                                    <img src="http://placehold.it/100x80"/>
-                                    <div class="caption text-center">
-                                        100个
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="thumbnail">
-                                    <img src="http://placehold.it/100x80"/>
-                                    <div class="caption text-center">
-                                        100个
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="thumbnail">
-                                    <img src="http://placehold.it/100x80"/>
-                                    <div class="caption text-center">
-                                        100个
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="thumbnail">
-                                    <img src="http://placehold.it/100x80"/>
-                                    <div class="caption text-center">
-                                        100个
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    {{--<div class="col-md-8">--}}
+                        {{--<div class="row">--}}
+                            {{--<div class="col-md-3">--}}
+                                {{--<div class="thumbnail">--}}
+                                    {{--<img src="http://placehold.it/100x80"/>--}}
+                                    {{--<div class="caption text-center">--}}
+                                        {{--100个--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
+                            {{--<div class="col-md-3">--}}
+                                {{--<div class="thumbnail">--}}
+                                    {{--<img src="http://placehold.it/100x80"/>--}}
+                                    {{--<div class="caption text-center">--}}
+                                        {{--100个--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
+                            {{--<div class="col-md-3">--}}
+                                {{--<div class="thumbnail">--}}
+                                    {{--<img src="http://placehold.it/100x80"/>--}}
+                                    {{--<div class="caption text-center">--}}
+                                        {{--100个--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
+                            {{--<div class="col-md-3">--}}
+                                {{--<div class="thumbnail">--}}
+                                    {{--<img src="http://placehold.it/100x80"/>--}}
+                                    {{--<div class="caption text-center">--}}
+                                        {{--100个--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
 
-                </div>
+                {{--</div>--}}
 
                 <hr>
 
@@ -80,8 +80,8 @@
                     </div>
 
                     <div class="col-md-8">
-                        <p>乘车消费累计：22.22 元</p>
-                        <p>载客收入累计：66.66 元</p>
+                        <p>乘车消费累计：22.22 TODO: 添加获取累计消费的接口 元</p>
+                        <p>载客收入累计：66.66 TODO: 添加获取累计收入的接口 元</p>
                     </div>
 
                 </div>
@@ -93,14 +93,23 @@
 
 <script>
     Vue.component('pickup-account', {
-        /*TODO:*/
         template: '#template-account',
         data(){
-            return {}
+            return {
+                user: {},
+            }
         },
         mounted(){
             $("#sidebar-account").addClass('active');
+            this.getUserFromLocalStorage();
         },
-        methods : {}
+        methods : {
+            getUserFromLocalStorage(){
+                let user = window.localStorage.getItem(AUTH_USER_INFO_LOCAL_STORAGE_KEY);
+                if (user !== null && user !== 'null') {
+                    this.user = JSON.parse(user);
+                }
+            },
+        },
     })
 </script>

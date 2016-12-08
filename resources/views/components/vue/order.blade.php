@@ -41,28 +41,30 @@
                             </thead>
                             <tbody>
                             {{--TODO: 填充实际数据--}}
-                            <tr>
-                                <td>2016.11.28 12:24</td>
-                                <td>3.8km 25min</td>
-                                <td>待支付</td>
-                                <td>已完成</td>
-                                <td><a href="#">前往支付</a></td>
-                            </tr>
-                            <tr>
-                                <td>2016.11.28 12:24</td>
-                                <td>3.8km 25min</td>
-                                <td>已支付</td>
-                                <td>已完成</td>
-                                <td><a href="#">详情</a></td>
+                            <tr v-for="payment in payments">
+                                <td>@{{ payment.created_at }}</td>
+                                <td>@{{ toKm(payment.distance) }}km @{{ toMin(payment.elapsed_time) }} min</td>
+                                <td>@{{ payment.paid_at? "已支付": "待支付" }}</td>
+                                <td>@{{ payment.finished_at?"已完成":"未完成" }}</td>
+
+                                <td v-if="payment.paid_at">
+                                    <a href="#">详情</a>
+                                </td>
+                                <td v-else>
+                                    <a href="#">前往支付</a>
+                                </td>
                             </tr>
                             </tbody>
                         </table>
                         <nav>
                             <ul class="pager">
-                                <li class="disabled"><a href="#">共1111条记录</a></li>
-                                <li><a href="#">Previous</a></li>
-                                <li><a href="#">Next</a></li>
-                                <li class="disabled"><a href="#">第1/112页</a></li>
+                                <li class="disabled"><a href="#">共@{{ payments_pagination.total }}条记录</a></li>
+                                <li :class="{ disabled : payments_pagination.current_page === 1}"><a @click.prevent="get_prev_page_of_payment_history"
+                                                                                                     href="#">Previous</a>
+                                </li>
+                                <li :class="{ disabled : payments_pagination.current_page === payments_pagination.last_page}"><a
+                                            @click.prevent="get_next_page_of_payment_history" href="#">Next</a></li>
+                                <li class="disabled"><a href="#">第@{{ payments_pagination.current_page }}/@{{ payments_pagination.last_page }}页</a></li>
                             </ul>
                         </nav>
                     </div>
@@ -79,28 +81,30 @@
                             </thead>
                             <tbody>
                             {{--TODO: 填充实际数据--}}
-                            <tr>
-                                <td>2016.11.28 12:24</td>
-                                <td>3.8km 25min</td>
-                                <td>待支付</td>
-                                <td>已完成</td>
-                                <td><a href="#">催单？？？</a></td>
-                            </tr>
-                            <tr>
-                                <td>2016.11.28 12:24</td>
-                                <td>3.8km 25min</td>
-                                <td>已支付</td>
-                                <td>已完成</td>
-                                <td><a href="#">详情</a></td>
+                            <tr v-for="revenue in revenues">
+                                <td>@{{ revenue.created_at }}</td>
+                                <td>@{{ toKm(revenue.distance) }}km @{{ toMin(revenue.elapsed_time) }} min</td>
+                                <td>@{{ revenue.paid_at? "已支付": "待支付" }}</td>
+                                <td>@{{ revenue.finished_at?"已完成":"未完成" }}</td>
+
+                                <td v-if="revenue.paid_at">
+                                    <a href="#">详情</a>
+                                </td>
+                                <td v-else>
+                                    <a href="#">催单</a>
+                                </td>
                             </tr>
                             </tbody>
                         </table>
                         <nav>
                             <ul class="pager">
-                                <li class="disabled"><a href="#">共2222条记录</a></li>
-                                <li><a href="#">Previous</a></li>
-                                <li><a href="#">Next</a></li>
-                                <li class="disabled"><a href="#">第2/555页</a></li>
+                                <li class="disabled"><a href="#">共@{{ revenues_pagination.total }}条记录</a></li>
+                                <li :class="{ disabled : revenues_pagination.current_page === 1}"><a @click.prevent="get_prev_page_of_revenue_history"
+                                                                                                     href="#">Previous</a>
+                                </li>
+                                <li :class="{ disabled : revenues_pagination.current_page === revenues_pagination.last_page}"><a
+                                            @click.prevent="get_next_page_of_revenue_history" href="#">Next</a></li>
+                                <li class="disabled"><a href="#">第@{{ revenues_pagination.current_page }}/@{{ revenues_pagination.last_page }}页</a></li>
                             </ul>
                         </nav>
                     </div>
@@ -113,14 +117,87 @@
 
 <script>
     Vue.component('pickup-order', {
-        /*TODO:*/
         template: '#template-order',
         data(){
-            return {}
+            return {
+                payments           : [],
+                payments_pagination: {},
+                revenues           : [],
+                revenues_pagination: {}
+            }
         },
         mounted(){
             $("#sidebar-order").addClass('active');
+            this.getPayments();
+            this.getRevenues();
         },
-        methods : {}
+        methods : {
+            getPayments(page = 1, per_page = 5){
+                let vue = this;
+                axios.get(constructPaginationUrl(API_ORDER_PAYMENTS, page, per_page)).then(function (res) {
+                    vue.payments            = res.data.data;
+                    vue.payments_pagination = res.data.pagination;
+                });
+            },
+
+            getRevenues(page = 1, per_page = 5){
+                let vue = this;
+                axios.get(constructPaginationUrl(API_ORDER_REVENUES, page, per_page)).then(function (res) {
+                    vue.revenues            = res.data.data;
+                    vue.revenues_pagination = res.data.pagination;
+                });
+            },
+
+            get_prev_page_of_payment_history(){
+                /*如果是第一页，则直接返回*/
+                if (this.payments_pagination.current_page === 1) {
+                    return
+                }
+
+                /*获取前一页的数据*/
+                this.getPayments(this.payments_pagination.current_page - 1);
+            },
+
+            get_next_page_of_payment_history(){
+                /*如果是最后一页，则直接返回*/
+                if (this.payments_pagination.current_page === this.payments_pagination.last_page) {
+                    return
+                }
+
+                /*获取后一页的数据*/
+                this.getPayments(this.payments_pagination.current_page + 1);
+            },
+
+            get_prev_page_of_revenue_history(){
+                /*如果是第一页，则直接返回*/
+                if (this.revenues_pagination.current_page === 1) {
+                    return
+                }
+
+                /*获取前一页的数据*/
+                this.getRevenues(this.revenues_pagination.current_page - 1);
+            },
+
+            get_next_page_of_revenue_history(){
+                /*如果是最后一页，则直接返回*/
+                if (this.revenues_pagination.current_page === this.revenues_pagination.last_page) {
+                    return
+                }
+
+                /*获取后一页的数据*/
+                this.getRevenues(this.revenues_pagination.current_page + 1);
+            },
+
+
+
+
+            toKm(distance){
+                return parseFloat(distance) / 1000;
+            },
+
+            toMin(time){
+                return parseInt(parseInt(time) / 60 * 100) / 100;
+            }
+        }
     })
 </script>
