@@ -177,12 +177,18 @@
                 })
             },
             finish_history(){
-                /*若当前地点与终点的距离过远，则判断乘客作弊，弹出提醒框并直接返回*/
+                /*TODO:若当前地点与终点的距离过远，则判断乘客作弊，弹出提醒框并直接返回*/
 
                 /*向服务器发出请求，将当前行程标记为已完成*/
-
-                /*切换到结算的界面*/
-                this.change_status('行程结束');
+                let vue = this;
+                axios.delete('/history/' + this.current_history_id).then(function (res) {
+                    let dialog = success_dialog(res.data.meta.message);
+                    window.setTimeout(function () {
+                        dialog.close();
+                        /*切换到结算的界面*/
+                        vue.change_status('行程结束');
+                    })
+                });
             },
 
             payNow(){
