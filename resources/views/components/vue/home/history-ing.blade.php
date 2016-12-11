@@ -137,7 +137,7 @@
 
                 /*设置定时器，从而实现每隔一段时间对位置信息进行更新*/
                 /*TODO：取消注释下面这行*/
-//                window.setTimeout(this.updatePositions, 2000);
+                window.setTimeout(this.updatePositions, 2000);
             },
 
             /*计算当前距离下能够将双方都放在可视范围下的缩放级别, 最小缩放级别为19*/
