@@ -47,7 +47,6 @@ services:
         #    - BALANCE=source
         depends_on:
             - redis
-            - db
         networks:
             - back_tier
     # the redis cache service
@@ -58,23 +57,10 @@ services:
         # TODO: add data for persistence
         networks:
             - back_tier
-    # the mysql database service
-    db:
-        image: mysql
-        volumes_from:
-            - volumes_data
-        restart: always
-        # set master/slave
-        networks:
-            - back_tier
     volumes_code:
         image: tianon/true
         networks:
             - front_tier
-            - back_tier
-    volumes_data:
-        image: tianon/true
-        networks:
             - back_tier
 networks:
     front_tier:
