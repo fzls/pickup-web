@@ -227,12 +227,18 @@
 
             /*=========================司机的操作============================*/
             start_history(){
-                /*若距离过远，则认为司机在作弊，弹出提醒框，并直接返回 */
+                /*TODO: 若距离过远，则认为司机在作弊，弹出提醒框，并直接返回 */
 
                 /*向服务器发出请求，将当前行程标记为已开始*/
-
-                /*切换装到到行程中*/
-                this.change_status('行程中');
+                let vue = this;
+                axios.put('/history/' + this.current_history_id).then(function (res) {
+                    let dialog = success_dialog(res.data.meta.message);
+                    window.setTimeout(function () {
+                        dialog.close();
+                        /*切换装到到行程中*/
+                        vue.change_status('行程中');
+                    })
+                });
             }
         }
     });
