@@ -40,6 +40,9 @@
                     school_id: school_id
                 }).then(function (res) {
                     success_dialog(res.data);
+                    setTimeout(function () {
+                        window.location.replace('/me');
+                    }, 1000);
                 });
             }
         },

@@ -53,10 +53,13 @@
                     } else {
                         /*若未找到相关信息，则向后端请求当前用户的相关信息*/
                         let vue = this;
-                        axios.get(API_ME).then(function (res) {
-                            vue.user = res.data.data;
-                            window.localStorage.setItem(AUTH_USER_INFO_LOCAL_STORAGE_KEY, JSON.stringify(vue.user, null, 4));
-                        })
+                        /*如果当前页面不是注册应用信息页面，则向后端请求该用户信息*/
+                        if (window.location.pathname.indexOf(URL_REGISTER) !== -1) {
+                            axios.get(API_ME).then(function (res) {
+                                vue.user = res.data.data;
+                                window.localStorage.setItem(AUTH_USER_INFO_LOCAL_STORAGE_KEY, JSON.stringify(vue.user, null, 4));
+                            })
+                        }
                     }
                 } else if (window.location.pathname.indexOf(AUTH_CALLBACK_PATH) === -1 && window.location.pathname.indexOf(AUTH_REDIRECT_PATH) === -1) {
                     // 否则如果不是oauth认证相关的的url，重定向到登陆界面
