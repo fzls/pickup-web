@@ -54,7 +54,7 @@
                         /*若未找到相关信息，则向后端请求当前用户的相关信息*/
                         let vue = this;
                         /*如果当前页面不是注册应用信息页面，则向后端请求该用户信息*/
-                        if (window.location.pathname.indexOf(URL_REGISTER) !== -1) {
+                        if (window.location.pathname.indexOf(URL_REGISTER) === -1) {
                             axios.get(API_ME).then(function (res) {
                                 vue.user = res.data.data;
                                 window.localStorage.setItem(AUTH_USER_INFO_LOCAL_STORAGE_KEY, JSON.stringify(vue.user, null, 4));
