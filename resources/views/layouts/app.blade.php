@@ -63,6 +63,7 @@ function getAssetUrl($path) {
 ?>
 {{--utils--}}
 <script src="{{getAssetUrl('/js/util/dialog.js')}}"></script>
+<script src="{{getAssetUrl('/js/util/user.js')}}"></script>
 
 {{--configs--}}
 <script src="{{getAssetUrl('/js/config/api.js')}}"></script>

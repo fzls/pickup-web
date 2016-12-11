@@ -5,8 +5,6 @@
 @include('components.blade.home.baidu-map-js')
 
 
-
-
 <script>
     /*定义一些对话框的消息内容*/
     let cancel_by_passenger_self_message = $(`
@@ -264,17 +262,54 @@
 `);
 
     Vue.component('pickup-history-ing', {
-        /*TODO:*/
         template: '#template-history-ing',
         data(){
-            return {}
+            return {
+                current_status: '等车',
+                other_user_id: '',
+                self_id: '',
+            }
         },
         mounted(){
             init_map("baidu_map");
-            this.tousu_success();
+            this.other_user_id = JSON.parse(window.localStorage.getItem('other_user_id'));
+            this.self_id = util_get_userinfo_from_localstorage().id;
+
+            /*为另一方添加位置图标*/
+            this.addMarkers();
+            /*获取另外一方的地址，并更新地图上的位置*/
+            this.updatePositions();
+            /*TODO：2 通过轮询确定是否被司机取消*/
+
+
         },
         methods : {
-            cancel_by_driver(){
+            updatePositions(){
+                /*TODO：1 从这里开始*/
+                /*调用定位控件获取自己的最新位置*/
+
+                /*向服务器发送自己的最新位置*/
+
+                /*获取对方的最新位置*/
+
+                /*根据双方的位置更新小红点的位置，并调整视图可视范围*/
+
+                /*设置定时器，从而实现每隔一段时间对位置信息进行更新*/
+
+            },
+            addMarkers(){
+                pickup_other_marker = new BMap.Marker(pickup_user_marker.getPosition());
+                pickup_map.addOverlay(pickup_other_marker);
+                pickup_other_marker.disableDragging();
+                let other_label = new BMap.Label("对方", {offset: new BMap.Size(-5, 30)});
+                pickup_other_marker.setLabel(other_label);
+
+                /*为起点添加标注*/
+                let me_label = new BMap.Label("您", {offset: new BMap.Size(-5, 30)});
+                pickup_user_marker.setLabel(me_label);
+                pickup_user_marker.disableDragging();
+            },
+            cancel_by_me(){
                 BootstrapDialog.show({
                     title  : '取消叫车',
                     message: cancel_by_passenger_self_message
@@ -347,5 +382,5 @@
                 })
             }
         }
-    })
+    });
 </script>
