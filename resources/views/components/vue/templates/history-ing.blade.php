@@ -22,6 +22,12 @@
 
             <div v-if="current_status === '行程中'">
                 正在行程中
+
+                <div v-if="is_driver === false">
+                    <hr>
+
+                    <button class="btn btn-success" @click="finish_history">结束行程</button>
+                </div>
             </div>
 
 
@@ -272,7 +278,12 @@
 
             {{--~~~~~~~~~~~~~~~~~~~~~~~~~~~司机界面~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~--}}
             <div v-if="current_status === '正在出发中'">
-                正在前往乘客的鲁中
+                <h4>正在前往乘客的路中</h4>
+
+                <hr>
+
+                <button class="btn btn-info" @click="start_history">已到达乘客处，开始行程</button>
+
             </div>
 
 

@@ -22,38 +22,44 @@
 `);
 
 
-
     Vue.component('pickup-history-ing', {
         template: '#template-history-ing',
         data(){
             return {
-                current_status: '行程结束',
-                previous_status: [],
-                other_user_id : '',
-                self_id       : '',
-                cnt           : 0,
-                finished: false,
-                current_history_id : '',
-                user: {},
-                give_gift: false
+                current_status    : '行程结束',
+                previous_status   : [],
+                other_user_id     : '',
+                self_id           : '',
+                cnt               : 0,
+                finished          : false,
+                current_history_id: '',
+                user              : {},
+                give_gift         : false,
+                is_driver         : false
             }
         },
         mounted(){
             vue_history_ing = this;
             init_map("baidu_map");
-            this.other_user_id = JSON.parse(window.localStorage.getItem('other_user_id'));
-            this.self_id       = util_get_userinfo_from_localstorage().id;
+            this.other_user_id      = JSON.parse(window.localStorage.getItem('other_user_id'));
+            this.self_id            = util_get_userinfo_from_localstorage().id;
             this.current_history_id = JSON.parse(window.localStorage.getItem('current_history_id'));
-            this.user = util_get_userinfo_from_localstorage();
-            this.current_status = JSON.parse(window.localStorage.getItem('current_status'));
+            this.user               = util_get_userinfo_from_localstorage();
+            this.current_status     = JSON.parse(window.localStorage.getItem('current_status'));
+            /*false for 乘客，and true for 司机*/
+            this.is_driver = JSON.parse(window.localStorage.getItem(AUTH_USER_STATUS_LOCAL_STORAGE_KEY)) || false;
 
             /*为另一方添加位置图标*/
             this.addMarkers();
             /*获取另外一方的地址，并更新地图上的位置*/
             this.updatePositions();
-            this.checkIfFinished();
-
-
+            if (this.is_driver) {
+                /*如果是司机，则开始检测乘客是否结束了行程*/
+                this.checkIfFinished();
+            } else {
+                /*若是乘客，则检测司机是否开始了行程*/
+                this.checkIfStarted();
+            }
         },
         methods : {
             change_status(status){
@@ -68,13 +74,33 @@
                 this.current_status = this.previous_status.pop();
             },
 
-            checkIfFinished(){
-                axios.get('/current-history').then(function(res){
+            checkIfStarted(){
+                axios.get('/history/' + this.current_history_id).then(function (res) {
                     console.log(res.data);
-                    if(res.data.data === null){
-                        /*如果当前行程已结束，则弹出支付界面*/
-                        vue_history_ing.finish_history();
-                    }else{
+                    let history = res.data.data;
+                    if (history.started_at !== null) {
+                        /*如果行程开始*/
+                        vue_history_ing.change_status('行程中');
+                    } else {
+                        /*如果正在进行中，则过5秒钟后继续检查*/
+                        console.log('sleep for 5 s to check again if finished');
+                        window.setTimeout(vue_history_ing.checkIfStarted, 5000);
+                    }
+                })
+            },
+
+            checkIfFinished(){
+                axios.get('/history/' + this.current_history_id).then(function (res) {
+                    console.log(res.data);
+                    let history = res.data.data;
+                    if (history.finished_at !== null) {
+                        /*如果行程已结束*/
+                        /*司机处显示订单完成，并跳转到司机的首页*/
+                        success_dialog('用户已确认行程完成，请耐心等待用户付款');
+                        setTimeout(function () {
+                            window.location.replace('/driver');
+                        }, 1000);
+                    } else {
                         /*如果正在进行中，则过5秒钟后继续检查*/
                         console.log('sleep for 5 s to check again if finished');
                         window.setTimeout(vue_history_ing.checkIfFinished, 5000);
@@ -151,13 +177,18 @@
                 })
             },
             finish_history(){
+                /*若当前地点与终点的距离过远，则判断乘客作弊，弹出提醒框并直接返回*/
+
+                /*向服务器发出请求，将当前行程标记为已完成*/
+
+                /*切换到结算的界面*/
                 this.change_status('行程结束');
             },
 
             payNow(){
                 let vue = this;
-                axios.post('/transfer',{
-                    to: this.other_user_id,
+                axios.post('/transfer', {
+                    to    : this.other_user_id,
                     amount: 10 /*TODO:加入实际的金额*/
                 }).then(function (res) {
                     let dialog = success_dialog('支付完成啦');
@@ -191,6 +222,17 @@
                 /*发送请求*/
 
                 this.change_status('投诉成功')
+            },
+
+
+            /*=========================司机的操作============================*/
+            start_history(){
+                /*若距离过远，则认为司机在作弊，弹出提醒框，并直接返回 */
+
+                /*向服务器发出请求，将当前行程标记为已开始*/
+
+                /*切换装到到行程中*/
+                this.change_status('行程中');
             }
         }
     });
