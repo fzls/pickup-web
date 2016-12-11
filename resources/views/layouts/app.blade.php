@@ -66,6 +66,7 @@ function getAssetUrl($path) {
 <script src="{{getAssetUrl('/js/util/user.js')}}"></script>
 
 {{--configs--}}
+<script src="{{getAssetUrl('/js/config/env.js')}}"></script>
 <script src="{{getAssetUrl('/js/config/api.js')}}"></script>
 <script src="{{getAssetUrl('/js/config/auth.js')}}"></script>
 <script src="{{getAssetUrl('/js/config/url.js')}}"></script>
