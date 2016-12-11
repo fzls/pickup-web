@@ -110,7 +110,7 @@
                             let message = res.data.meta.message;
                             if (message === 'accepted') {
                                 // TODO：获取对方的id，并存到本地，用于后续在地图上显示对方的位置
-                                alert(history);
+//                                alert(history);
                                 window.localStorage.setItem('current_history_id', JSON.stringify(history.id));
                                 window.localStorage.setItem('other_user_id', JSON.stringify(history.driver_id));
                                 window.localStorage.setItem('current_status', JSON.stringify('等车'));
