@@ -266,14 +266,14 @@
         data(){
             return {
                 current_status: '等车',
-                other_user_id: '',
-                self_id: '',
+                other_user_id : '',
+                self_id       : ''
             }
         },
         mounted(){
             init_map("baidu_map");
             this.other_user_id = JSON.parse(window.localStorage.getItem('other_user_id'));
-            this.self_id = util_get_userinfo_from_localstorage().id;
+            this.self_id       = util_get_userinfo_from_localstorage().id;
 
             /*为另一方添加位置图标*/
             this.addMarkers();
@@ -285,18 +285,39 @@
         },
         methods : {
             updatePositions(){
-                /*TODO：1 从这里开始*/
-                /*调用定位控件获取自己的最新位置*/
+                /*调用定位控件获取自己的最新位置, 并更新小红点的位置*/
+                geolocationControl.location();
+                let current_position = pickup_user_marker.getPosition();
 
                 /*向服务器发送自己的最新位置*/
+                axios.post('/current_location',{
+                    latitude: current_position.lat,
+                    longitude: current_position.lng,
+                }).then(function (res) {
+                    console.log(res.data);
+                });
 
-                /*获取对方的最新位置*/
+                /*获取对方的最新位置, 并更新小红点的位置*/
+                axios.get(`/users/${this.other_user_id}/current_location`).then(function (res) {
+                    pickup_other_marker.setPosition(new BMap.Point(res.data.data.lng, res.data.data.lat));
+                    console.log('other user location');
+                    console.log(res.data);
+                });
 
-                /*根据双方的位置更新小红点的位置，并调整视图可视范围*/
+                /*调整视图可视范围*/
+                let dis = pickup_map.getDistance(pickup_user_marker.getPosition(), pickup_other_marker.getPosition());
+                let scale = this.getScale(dis);
+                pickup_map.setZoom(scale);
 
-                /*设置定时器，从而实现每隔一段时间对位置信息进行更新*/
+                /*TODO：设置定时器，从而实现每隔一段时间对位置信息进行更新*/
 
             },
+
+            /*计算当前距离下能够将双方都放在可视范围下的缩放级别*/
+            getScale(dis){
+                return 26 - Math.ceil(Math.log2(dis));
+            },
+
             addMarkers(){
                 pickup_other_marker = new BMap.Marker(pickup_user_marker.getPosition());
                 pickup_map.addOverlay(pickup_other_marker);

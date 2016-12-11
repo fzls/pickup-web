@@ -159,6 +159,10 @@
 
                 /*乘以单位距离的价格，获得预计费用*/
                 let dis = pickup_map.getDistance(start, end);
+
+//                console.log('distance is '+dis);
+//                console.log('zoom is '+pickup_map.getZoom());
+//                geolocationControl.location();
                 /* m */
                 return dis * 0.001;
                 /*每km一元*/

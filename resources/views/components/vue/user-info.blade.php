@@ -58,6 +58,10 @@
                             window.localStorage.setItem(AUTH_USER_INFO_LOCAL_STORAGE_KEY, JSON.stringify(vue.user, null, 4));
                         })
                     }
+                } else {
+                    // 否则，重定向到登陆界面
+                    alert_dialog("主人还没登陆过呢");
+                    window.location.replace(AUTH_REDIRECT_URI);
                 }
             },
             logout(){
@@ -69,10 +73,10 @@
                 /*切换用户身份，并记录*/
                 this.status = !this.status;
                 window.localStorage.setItem(AUTH_USER_STATUS_LOCAL_STORAGE_KEY, JSON.stringify(this.status));
-                if(this.status){
+                if (this.status) {
                     /*如果是司机*/
                     window.location.href = "{{url('/driver')}}";
-                }else{
+                } else {
                     window.location.href = "{{url('/passenger')}}";
                 }
             }

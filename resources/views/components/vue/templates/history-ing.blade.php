@@ -16,6 +16,10 @@
             <hr>
 
             <button class="btn btn-danger" @click="cancel_by_me">取消叫车</button>
+
+            <hr>
+
+            <button class="btn btn-success" @click="updatePositions">Test func</button>
         </div>
         <div v-else-if="current_status === '行程中'">
             行程中
