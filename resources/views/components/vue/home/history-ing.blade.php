@@ -45,6 +45,7 @@
             this.self_id       = util_get_userinfo_from_localstorage().id;
             this.current_history_id = JSON.parse(window.localStorage.getItem('current_history_id'));
             this.user = util_get_userinfo_from_localstorage();
+            this.current_status = JSON.parse(window.localStorage.getItem('current_status'));
 
             /*为另一方添加位置图标*/
             this.addMarkers();

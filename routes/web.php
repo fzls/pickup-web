@@ -23,6 +23,8 @@ Route::get('/home', function () { return view('index'); });
 Route::get('/passenger', function () { return view('home.passenger.action'); });
 Route::get('/request-for-car', function () { return view('home.passenger.request'); });
 
+Route::get('/driver', function () { return view('home.driver.request-list'); });
+
 
 Route::get('/history', function () { return view('history'); });
 Route::get('/ranking', function () { return view('ranking'); });
@@ -37,7 +39,7 @@ Route::get('/notification', function () { return view('account.notification'); }
 
 /*行程中的界面*/
 Route::get('/history-ing', function () { return view('home.history-ing'); });
-/*TODO: 完成乘客和车主界面*/
+
 
 /*test*/
 Route::get('/test', function () {

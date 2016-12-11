@@ -268,6 +268,14 @@
 
                 <button class="btn btn-info btn-block" @click="redirect('/me')">确认</button>
             </div>
+
+
+            {{--~~~~~~~~~~~~~~~~~~~~~~~~~~~司机界面~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~--}}
+            <div v-if="current_status === '正在出发中'">
+                正在前往乘客的鲁中
+            </div>
+
+
         </div>
     </div>
 </div>

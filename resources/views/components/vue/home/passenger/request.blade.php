@@ -109,6 +109,7 @@
                                 // TODO：获取对方的id，并存到本地，用于后续在地图上显示对方的位置
                                 window.localStorage.setItem('current_history_id', JSON.stringify(res.data.data.id));
                                 window.localStorage.setItem('other_user_id', JSON.stringify(res.data.data.driver_id));
+                                window.localStorage.setItem('current_status', JSON.stringify('等车'));
                                 window.location.replace('{{url('/history-ing')}}');
                             } else {
                                 console.log('not yet');
