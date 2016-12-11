@@ -79,10 +79,11 @@
                     /*显示进度*/
                     let canceled = false;
                     BootstrapDialog.show({
-                        title  : '等待接单',
-                        message: '系统正在为您叫车，请稍等......',
-                        type   : BootstrapDialog.TYPE_INFO,
-                        buttons: [{
+                        title   : '等待接单',
+                        message : '系统正在为您叫车，请稍等......',
+                        type    : BootstrapDialog.TYPE_INFO,
+                        closable: false,
+                        buttons : [{
                             label : '取消',
                             action: function (dialog) {
                                 BootstrapDialog.confirm('确认取消叫车?', function (result) {
@@ -105,18 +106,17 @@
                         }
 
                         axios.get('/request-status').then(function (res) {
-                            if (res.data.meta.message === 'accepted') {
+                            let history = res.data.data;
+                            let message = res.data.meta.message;
+                            if (message === 'accepted') {
                                 // TODO：获取对方的id，并存到本地，用于后续在地图上显示对方的位置
-                                window.localStorage.setItem('current_history_id', JSON.stringify(res.data.data.id));
-                                window.localStorage.setItem('other_user_id', JSON.stringify(res.data.data.driver_id));
+                                alert(history);
+                                window.localStorage.setItem('current_history_id', JSON.stringify(history.id));
+                                window.localStorage.setItem('other_user_id', JSON.stringify(history.driver_id));
                                 window.localStorage.setItem('current_status', JSON.stringify('等车'));
                                 window.location.replace('{{url('/history-ing')}}');
                             } else {
                                 console.log('not yet');
-                                console.log(interval);
-                                if (interval < 5000) {
-                                    interval += 500;
-                                }
                                 setTimeout(function () {
                                     checkIfBeingAccepted(interval);
                                 }, interval);
