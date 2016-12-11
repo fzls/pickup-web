@@ -5635,7 +5635,7 @@ function manipulationTarget( elem, content ) {
 	return elem;
 }
 
-// Replace/restore the type attribute of script elements for safe DOM manipulation
+// Replace/back the type attribute of script elements for safe DOM manipulation
 function disableScript( elem ) {
 	elem.type = ( elem.getAttribute( "type" ) !== null ) + "/" + elem.type;
 	return elem;
@@ -9690,7 +9690,7 @@ jQuery.ajaxPrefilter( "json jsonp", function( s, originalSettings, jqXHR ) {
 			if ( overwritten === undefined ) {
 				jQuery( window ).removeProp( callbackName );
 
-			// Otherwise restore preexisting value
+			// Otherwise back preexisting value
 			} else {
 				window[ callbackName ] = overwritten;
 			}
