@@ -17,8 +17,7 @@
             /*当定位成功后，进行相应处理*/
             /*从事件中获取当前位置信息*/
             current_location = e.point;
-            console.log(current_location);
-            console.log('test');
+            // console.log(current_location);
             /*初始化地图，设置当前点为地图中心 16/200m,17/100m,18/50m, 19/20m*/
             pickup_map.panTo(current_location);  // 初始化地图,设置中心点坐标和地图级别
             pickup_user_marker.setPosition(current_location);

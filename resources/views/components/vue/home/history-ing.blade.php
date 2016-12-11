@@ -267,7 +267,8 @@
             return {
                 current_status: '等车',
                 other_user_id : '',
-                self_id       : ''
+                self_id       : '',
+                cnt:0
             }
         },
         mounted(){
@@ -289,19 +290,22 @@
                 geolocationControl.location();
                 let current_position = pickup_user_marker.getPosition();
 
+                console.log('----------------------------------'+this.cnt++);
+
                 /*向服务器发送自己的最新位置*/
                 axios.post('/current_location',{
                     latitude: current_position.lat,
                     longitude: current_position.lng,
                 }).then(function (res) {
-                    console.log(res.data);
+                    console.log('update self');
+                    console.log(res.data.data);
                 });
 
                 /*获取对方的最新位置, 并更新小红点的位置*/
                 axios.get(`/users/${this.other_user_id}/current_location`).then(function (res) {
-                    pickup_other_marker.setPosition(new BMap.Point(res.data.data.lng, res.data.data.lat));
+                    pickup_other_marker.setPosition(new BMap.Point(res.data.data.longitude, res.data.data.latitude));
                     console.log('other user location');
-                    console.log(res.data);
+                    console.log(res.data.data);
                 });
 
                 /*调整视图可视范围*/
@@ -310,12 +314,16 @@
                 pickup_map.setZoom(scale);
 
                 /*TODO：设置定时器，从而实现每隔一段时间对位置信息进行更新*/
-
+//                window.setTimeout(this.updatePositions, 2000);
             },
 
-            /*计算当前距离下能够将双方都放在可视范围下的缩放级别*/
+            /*计算当前距离下能够将双方都放在可视范围下的缩放级别, 最小缩放级别为19*/
             getScale(dis){
-                return 26 - Math.ceil(Math.log2(dis));
+                if(dis<1){
+                    dis=1
+                }
+
+                return Math.min(26 - Math.ceil(Math.log2(dis)), 19);
             },
 
             addMarkers(){

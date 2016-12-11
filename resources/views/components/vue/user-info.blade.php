@@ -58,8 +58,8 @@
                             window.localStorage.setItem(AUTH_USER_INFO_LOCAL_STORAGE_KEY, JSON.stringify(vue.user, null, 4));
                         })
                     }
-                } else {
-                    // 否则，重定向到登陆界面
+                } else if (window.location.pathname.indexOf(AUTH_CALLBACK_PATH) === -1 && window.location.pathname.indexOf(AUTH_REDIRECT_PATH) === -1) {
+                    // 否则如果不是oauth认证相关的的url，重定向到登陆界面
                     alert_dialog("主人还没登陆过呢");
                     window.location.replace(AUTH_REDIRECT_URI);
                 }
