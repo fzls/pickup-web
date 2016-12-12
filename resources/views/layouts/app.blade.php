@@ -11,12 +11,16 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
-    <link rel="stylesheet" href="{{asset('/vendor/css/bootstrap.css')}}">
-    <link rel="stylesheet" href="{{asset('/vendor/css/bootstrap-theme.css')}}">
-    <link rel="stylesheet" href="{{asset('/vendor/css/bootstrap-dialog.css')}}">
-    <link rel="stylesheet" href="{{asset('/vendor/css/bootstrap-datetimepicker.css')}}">
-    <link rel="stylesheet" href="{{asset('/vendor/css/titatoggle-dist.css')}}">
-    <link rel="stylesheet" href="{{asset('/vendor/css/font-awesome.css')}}">
+    <link rel="stylesheet" href="{{asset('/vendor/css/tether.min.css')}}">
+    <link rel="stylesheet" href="{{asset('/vendor/css/tether-theme-arrows.min.css')}}">
+    <link rel="stylesheet" href="{{asset('/vendor/css/tether-theme-arrows-dark.min.css')}}">
+    <link rel="stylesheet" href="{{asset('/vendor/css/tether-theme-basic.min.css')}}">
+    <link rel="stylesheet" href="{{asset('/vendor/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{asset('/vendor/css/bootstrap-theme.min.css')}}">
+    <link rel="stylesheet" href="{{asset('/vendor/css/bootstrap-dialog.min.css')}}">
+    <link rel="stylesheet" href="{{asset('/vendor/css/bootstrap-datetimepicker.min.css')}}">
+    <link rel="stylesheet" href="{{asset('/vendor/css/titatoggle-dist-min.css')}}">
+    <link rel="stylesheet" href="{{asset('/vendor/css/font-awesome.min.css')}}">
 
     <!-- Scripts -->
     <script>
@@ -36,15 +40,15 @@
 
 <!-- Scripts -->
 {{--3rd party libs--}}
-<script src="{{asset('/vendor/js/jquery-3.1.1.js')}}"></script>
-<script src="{{asset('/vendor/js/tether.js')}}"></script>
-<script src="{{asset('/vendor/js/bootstrap.js')}}"></script>
-<script src="{{asset('/vendor/js/bootstrap-dialog.js')}}"></script>
-<script src="{{asset('/vendor/js/moment.js')}}"></script>
-<script src="{{asset('/vendor/js/moment-timezone.js')}}"></script>
-<script src="{{asset('/vendor/js/bootstrap-datetimepicker.js')}}"></script>
-<script src="{{asset('/vendor/js/vue.js')}}"></script>
-<script src="{{asset('/vendor/js/axios.js')}}"></script>
+<script src="{{asset('/vendor/js/jquery-3.1.1.min.js')}}"></script>
+<script src="{{asset('/vendor/js/tether.min.js')}}"></script>
+<script src="{{asset('/vendor/js/bootstrap.min.js')}}"></script>
+<script src="{{asset('/vendor/js/bootstrap-dialog.min.js')}}"></script>
+<script src="{{asset('/vendor/js/moment.min.js')}}"></script>
+<script src="{{asset('/vendor/js/moment-timezone.min.js')}}"></script>
+<script src="{{asset('/vendor/js/bootstrap-datetimepicker.min.js')}}"></script>
+<script src="{{asset('/vendor/js/vue.min.js')}}"></script>
+<script src="{{asset('/vendor/js/axios.min.js')}}"></script>
 <script src="{{asset('/vendor/js/lodash.min.js')}}"></script>
 
 
