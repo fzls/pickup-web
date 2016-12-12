@@ -47,12 +47,14 @@
                 let token = window.localStorage.getItem(AUTH_TOKEN_LOCAL_STORAGE_KEY);
                 if (token) {
                     /*NOTE: 为了保证用户的时效性，每次均重新进行请求，从而可以保证个人中心的信息是最新的*/
-                    let vue = this;
+                    /*从本地存储读取之前更新过的用户信息*/
+                    this.user = JSON.parse(window.localStorage.getItem(AUTH_USER_INFO_LOCAL_STORAGE_KEY));
+
+                    /*更新用户信息， 并存储到本地，用以后续取出*/
                     /*如果当前页面不是注册应用信息页面，则向后端请求该用户信息*/
                     if (window.location.pathname.indexOf(URL_REGISTER) === -1) {
                         axios.get(API_ME).then(function (res) {
-                            vue.user = res.data.data;
-                            window.localStorage.setItem(AUTH_USER_INFO_LOCAL_STORAGE_KEY, JSON.stringify(vue.user, null, 4));
+                            window.localStorage.setItem(AUTH_USER_INFO_LOCAL_STORAGE_KEY, JSON.stringify(res.data.data, null, 4));
                         })
                     }
                 } else if (window.location.pathname.indexOf(AUTH_CALLBACK_PATH) === -1 && window.location.pathname.indexOf(AUTH_REDIRECT_PATH) === -1) {
