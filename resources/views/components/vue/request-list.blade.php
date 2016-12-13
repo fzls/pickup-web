@@ -43,7 +43,8 @@
         data(){
             return {
                 requests: [],
-                user    : {}
+                user    : {},
+                done  : false
             }
         },
         mounted(){
@@ -55,9 +56,15 @@
                 let vue = this;
                 axios.get('/requests').then(function (res) {
                     vue.requests = res.data.data;
+
+                    /*假如司机没有接单，则每隔1.5s重新对订单列表进行请求，从而获得最新的列表*/
+                    if(vue.done === false){
+                        window.setTimeout(vue.getRequests, 1500);
+                    }
                 })
             },
             jiedan(index){
+                this.done = true;
                 let req = this.requests[index];
                 axios.put('/requests', {
                     request_id: req.id
