@@ -93,5 +93,8 @@ function getAssetUrl($path) {
         });
     });
 </script>
+
+{{--Google analytics 相关代码--}}
+@include('analyticstracking')
 </body>
 </html>
