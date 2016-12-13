@@ -62,7 +62,7 @@
                             </tr>
                         </table>
                         <div class="text-right">
-                            <button @click="add" class="btn btn-info">添加地址 TODO:转到另一个界面，其中有百度地图，用户搜索或者在图上选取地点，然后点击保存进行添加</button>
+                            <button @click="add" class="btn btn-info">添加地址</button>
                         </div>
                     </div>
                 </div>
@@ -101,7 +101,7 @@
             },
 
             add(){
-
+                success_dialog('因为主人様太懒了，这个功能并没有被实装哦','来自不知道该叫什么姬的没有设定的看板娘');
             },
 
             edit(index){
