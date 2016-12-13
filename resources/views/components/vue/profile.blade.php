@@ -61,8 +61,8 @@
                                 <td><button style="display: none;" type="button" class="btn btn-success" @click.prevent="save(index)" :id="getButtonId(index)">保存</button></td>
                             </tr>
                         </table>
-                        <div class="text-right">
-                            <button @click="add" class="btn btn-info">添加地址</button>
+                        <div>
+                            <button @click="add" class="btn btn-info btn-block">添加地址</button>
                         </div>
                     </div>
                 </div>
